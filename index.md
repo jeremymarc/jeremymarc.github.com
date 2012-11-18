@@ -1,10 +1,8 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: Jeremy Marc
+tagline: Software Engineer
 ---
 {% include JB/setup %}
 
-
-## Coming soon
 

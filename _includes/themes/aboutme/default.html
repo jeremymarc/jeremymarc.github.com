@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="{{ ASSET_PATH }}/css/application.css?body=1" rel="stylesheet" type="text/css" media="all">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="content">
+        {{ content }}
+      </div>
+      <div class="articles">
+          <h2>Last articles</h2>
+          <ul class="articles-list">
+              {% for post in site.posts %}
+                  <li><a href="#">{{post.title}}</a></li>
+              {% endfor %}
+           </ul>
+      </div>
+      <div class="socials">
+          <a href="mailto:jeremy.marc@me.com" class="social email">Email</a>
+          <a href="http://twitter.com/jeremymarc" class="social twitter">Twitter</a>
+          <a href="skype:jeremymarc" class="social skype">Skype</a>
+          <a href="http://github.com/jeremymarc" class="social github">Github</a>
+      </div>
+    </div>
+    {% include JB/analytics %}
+  </body>
+</html>
