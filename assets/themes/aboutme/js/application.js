@@ -1,6 +1,6 @@
 $(window).on('scroll', function(e) {
     var isDark = false;
-    if ($(this).scrollTop() < 200) {
+    if ($(this).scrollTop() < 100) {
         isDark = false;
         $('#bg-image').stop().animate({
             'opacity': '0.7',
