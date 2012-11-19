@@ -108,7 +108,7 @@ a {
     height: 37px;
     text-indent: -9999px;
     display: block;
-    position: absolute;
+    position: fixed;
     left: 10px;
     top: 10px;
     opacity: .5;
