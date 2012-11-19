@@ -174,16 +174,22 @@ a {
 
 
 /* article styles */
-.content .post {
+.content .post,
+.content .page {
     width: 960px;
     margin: 0 auto;
     color: rgba(255, 255, 255, 0.6);
 }
     .content .post h1,
+    .content .page h1,
     .content .post h2,
+    .content .page h2,
     .content .post h3,
+    .content .page h3,
     .content .post h4,
-    .content .post h5 {
+    .content .page h4,
+    .content .post h5,
+    .content .page h5 {
         color: rgba(255, 255, 255, 0.6);
     }
 
@@ -192,6 +198,7 @@ a {
     width: 960px;
     margin: 0 auto;
     color: rgba(255, 255, 255, 0.6);
+    padding-bottom: 50px;
 }
     .content .tags .tag_box {
         list-style: none;
