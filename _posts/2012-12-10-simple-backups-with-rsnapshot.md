@@ -12,7 +12,7 @@ To achieve this, we will use [rsnapshot](https://github.com/DrHyde/rsnapshot)
  a filesystem snapshot utility, written in PERL, for making backups of local 
 and remote systems using ssh and rsync.
 
-Rsnapshot is using hard link (http://en.wikipedia.org/wiki/Hard_link) to create
+Rsnapshot is using [hard link] (http://en.wikipedia.org/wiki/Hard_link) to create
 differencial backups from the first full backup.
 
 
