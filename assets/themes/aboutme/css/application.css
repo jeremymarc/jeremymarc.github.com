@@ -54,7 +54,6 @@
 
 }
 
-
 /* social icons */
 .socials {
     position: fixed;
@@ -174,6 +173,26 @@ a {
 
 
 /* article styles */
+.content code,
+.content pre {
+    background: #fff;
+    font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
+    line-height: 1.4em;
+    padding: 0 1em 1.3em 1em;
+    font-size: 13px;
+    color: #000;
+    display: block;
+    text-shadow: 0 0 0;
+    margin: 10px 0 25px 0;
+    white-space: pre;
+    overflow: scroll;
+    
+}
+.content .gist .gist-file .gist-meta {
+    text-shadow: 0 0 0;
+    font-size: 11px;
+}
+
 .content .post,
 .content .page {
     width: 960px;
@@ -191,6 +210,10 @@ a {
     .content .post h5,
     .content .page h5 {
         color: rgba(255, 255, 255, 0.6);
+    }
+
+    .content .post h2 {
+        margin-top: 50px;
     }
 
 /* tag styles */
