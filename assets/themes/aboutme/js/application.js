@@ -1,16 +1,8 @@
 $(window).ready(function() {
-    $(window).on('scroll', function(e) {
-        var isDark = false;
-        if ($(this).scrollTop() < 100) {
-            isDark = false;
-            $('#bg-image').stop().animate({
-                'opacity': '0.7',
-            }, 300);
-        } else if (!isDark) {
-            isDark = true;
-            $('#bg-image').stop().animate({
-                'opacity': '0.3',
-            }, 300);
-        }
+    $(document).on('click', '.social.email', function(e) {
+        var a = ['c', 'm', 'a', 'e', '.', 'o', 'm', 'j', 'r', 'c', '@'];
+        var e = a[7] + a[3] + a[8] + a[3] + a[1] + "y" + a[4] + a[1] + a[2] + a[8] + a[9]  + a[10] + a[1] + a[3] + a[4] + "com";
+        document.location = "mailto:" + e;
+        return false;
     });
 });

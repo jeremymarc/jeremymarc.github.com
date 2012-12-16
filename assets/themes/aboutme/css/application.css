@@ -97,6 +97,28 @@ body {
     font-family: "RonniaRegular";
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
+body.post {
+    text-shadow: none;
+    background-color: #252525;
+    color: #fff;
+}
+  body.post .content .post,
+  body.post .content .page {
+      color: #fff;
+  }
+  body.post #bg-image {
+      display: none;
+  }
+  body.post a,
+  body.post h1,
+  body.post h2,
+  body.post h3,
+  body.post h4,
+  body.post h5 {
+      color: #ff9d70;
+  }
+
+
 a {
     color: #fff;
     text-decoration: none;
@@ -199,15 +221,10 @@ a {
     margin: 0 auto;
     color: rgba(255, 255, 255, 0.6);
 }
-    .content .post h1,
     .content .page h1,
-    .content .post h2,
     .content .page h2,
-    .content .post h3,
     .content .page h3,
-    .content .post h4,
     .content .page h4,
-    .content .post h5,
     .content .page h5 {
         color: rgba(255, 255, 255, 0.6);
     }
