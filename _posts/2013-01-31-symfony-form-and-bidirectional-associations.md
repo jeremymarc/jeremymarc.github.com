@@ -37,7 +37,7 @@ _Note: You can run ./app/console doctrine:schema:validate to make sure the schem
 correct._         
     
 As the user can have multiples addresses, Address entity will be the owning side and
-User the inversed side.
+User the inverse side.
 
 Now imagine you want to create a new User using Symfony2 form. The form will
 looks like : 
@@ -135,7 +135,7 @@ $user->setAddress($address);
 
 _Note: this solution is working for OneToOne association too._
 
-## Solution 2. Add addAddress/removeAddress method.
+## Solution 2. Add addXXX/removeXXX methods.
 The second solution is to add 2 methods in the User.php entity which will be called
 automatically by Doctrine when adding or removing an Address.
 ```
