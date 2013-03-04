@@ -7,6 +7,11 @@ tags: [doctrine, php, symfony2, form]
 ---
 {% include JB/setup %}
 
+Dealing with doctrine associations is getting more and more simple with new
+versions. But doctrine is still based on few concepts which need to be understood.
+Owning and reverse side is one of them ; we will see how it can be handled when
+working with symfony2 forms.
+
 Imagine the situation where you have a User which can have multiples addresses.
 You will create 2 entities like this : 
 
@@ -16,7 +21,7 @@ Entity/User.php :
 class User
 {
     /*
-     * @ORM\OneToMany(targetEntity="AdRule", mappedBy="adUnit", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="user", cascade={"persist", "remove"})
      */
     private $addresses;
 }
@@ -28,7 +33,7 @@ Entity/Address.php :
 class Address
 {
     /* 
-     * @ORM\ManyToOne(targetEntity="AdUnit", inversedBy="adRules")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="addresses")
      */
     private $user;
 }
