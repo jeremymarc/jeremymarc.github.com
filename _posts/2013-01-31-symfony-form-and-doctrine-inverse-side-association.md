@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Symfony form and doctrine inversed side associations"
+title: "Symfony form and doctrine inverse side association"
 description: ""
 category: 
 tags: [doctrine, php, symfony2, form]
