@@ -75,12 +75,10 @@ public function createUserAction(Request $request)
 {
     $user = new User;
     $form = $this->createForm(new UserType(), $user);
-    if ($request->isMethod('POST')) {
-        $form->bind($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($user); //error throwing
-        }
+    if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($user); //error throwing
+    }
 }
 ```
 
