@@ -123,7 +123,7 @@ public function setAddresses($addresses)
 ```
 to :
 ```
-public function setAdRules($adRules) 
+public function setAddresses($addresses) 
 {
     $this->addresses = $addresses;
     foreach ($addresses as $address) {
