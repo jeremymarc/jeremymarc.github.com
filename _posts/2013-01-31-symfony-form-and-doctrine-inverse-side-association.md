@@ -157,7 +157,7 @@ _Note: this solution is working for OneToOne association too._
 
 ## Solution 2. Add addXXX/removeXXX methods.
 The second solution is to add 2 methods in the User.php entity which will be called
-automatically by Doctrine when adding or removing an Address.
+automatically by Symfony (https://github.com/symfony/PropertyAccess/blob/master/PropertyAccessor.php#L323) when adding or removing an Address.
 
     {% highlight php linenum %}   
     <?php
