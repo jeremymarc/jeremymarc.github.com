@@ -96,7 +96,7 @@ After trying to persist the $user entity (last line), we are getting "user_id ca
 null" error.
 
 This is due to the owning and inverse side doctrine concept. Doctrine will only
-check the owning side of the associations and we working with the inverse side 
+check the owning side of the associations and we are working with the inverse side 
 [http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html] (http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html)
 :
 > Doctrine needs to know which of these two in-memory references is the one that
