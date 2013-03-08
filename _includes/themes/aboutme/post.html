@@ -1,63 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>{{ page.title }}</title>
-        {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-        <meta name="author" content="{{ site.author.name }}">
-        <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <link href="{{ ASSET_PATH }}/css/application.css?body=1" rel="stylesheet" type="text/css" media="all">
-    </head>
-
-    <body class="post">
-        <div class="container">
-            <div class="content">
-                <a href="/" class="back-btn">Back</a>
-                <div class="page-header">
-                    <h1>{{ page.title }} {{ if page.description }}<small>{{ page.description }}</small>{{ endif }}</h1>
-                </div>
-                <div class="post">
-                    <p class="post-date">{{ page.date | date_to_long_string }}</p>
-                    {{ content }}
-                </div>
-                <div class="tags">
-                    {% unless page.tags == empty %}
-                    <ul class="tag_box">
-                        {% assign tags_list = page.tags %}
-                        {% include JB/tags_list %}
-                    </ul>
-                    {% endunless %}  
-                </div>
-                <div class="comments">
-                    {% include JB/comments %}
+<div class="post-page-wrapper-inner">
+    <div class="post-page-wrapper-inner">
+        <div class="post-author-side">
+            <div class="post-author-card">
+                <div class="post-published-date">
+                    <strong>Published</strong>
+                    <p><time class="post-date wf">{{ page.date | date_to_long_string }}</time></p>
                 </div>
 
-                {% if site.posts.length > 1 %}
-                <div class="post-list">
-                    <h2>Other articles</h2>
-                    <ul>
-                        {% for post in site.posts %}
-                        {% if post.id != page.id %}
-                        <li><a href="{{post.url}}">{{post.title}}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
+                <div class="post-btn-actions">
+                    <a class="btn btn-edit" href="https://github.com/jeremymarc/jeremymarc.github.com/edit/master/_posts/{{ page.url | remove_first: '/' | replace:'/','-' }}.md"> Edit this page</a>
+                    <a href="https://twitter.com/jeremymarc" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @jeremymarc</a>
                 </div>
-                {% endif %}
             </div>
-            <div class="socials">
-                <a href="#" class="social email">Email</a>
-                <a href="http://twitter.com/jeremymarc" class="social twitter">Twitter</a>
-                <a href="skype:jeremymarc" class="social skype">Skype</a>
-                <a href="http://github.com/jeremymarc" class="social github">Github</a>
-            </div>
-            <div id="bg-image"></div>
         </div>
-        {% include JB/analytics %}
-        <script src="{{ ASSET_PATH }}/js/jquery-1.8.3.min.js?body=1"></script>
-        <script src="{{ ASSET_PATH }}/js/application.js?body=1"></script>
-    </body>
-</html>
+        <div class="post-content">
+            <a class="back btn-back" title="Back to homepage" href="/">&laquo; back</a>
+            <header class="post-header">
+                <h1 tabindex="1" class="post-title">{{ page.title }}</h1>
+            </header>
+            <div tabindex="2" class="post-field body">
+                {{ content }}
+            </div>
 
+            <div class="post-actions" tabindex="3">
+                <a href="https://twitter.com/jeremymarc"
+                    class="twitter-follow-button"
+                    data-show-count="false"
+                    data-size="large">Follow @jeremymarc</a>
+            </div>
+
+            <div class="post-tags">
+                {% unless page.tags == empty %}
+                <ul class="tag_box">
+                    {% assign tags_list = page.tags %}
+                    {% include JB/tags_list %}
+                </ul>
+                {% endunless %}  
+            </div>
+            <div class="post-comments">
+                {% include JB/comments %}
+            </div>
+
+            {% if site.posts.length > 1 %}
+            <div class="post-list">
+                <h2>Other articles</h2>
+                <ul>
+                    {% for post in site.posts %}
+                    {% if post.id != page.id %}
+                    <li><a href="{{post.url}}">{{post.title}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
