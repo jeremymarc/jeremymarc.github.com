@@ -22,8 +22,8 @@ You will create 2 entities like this :
     class User
     {
         /*
-        * @ORM\OneToMany(targetEntity="Address", mappedBy="user", cascade={"persist", "remove"})
-        */
+         * @ORM\OneToMany(targetEntity="Address", mappedBy="user", cascade={"persist", "remove"})
+         */
         private $addresses;
     }
     {% endhighlight %}   
@@ -150,7 +150,7 @@ to :
 This way, the User is directly set when calling :
 
     {% highlight php linenum %}   
-    $user->setAddress($address);
+    $user->setAddresses($addresses);
     {% endhighlight %}   
 
 _Note: this solution is working for OneToOne association too._
