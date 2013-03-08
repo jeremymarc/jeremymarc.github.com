@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Symfony form and doctrine inverse side association"
-description: ""
+description: "Symfony form and doctrine inverse side association"
 category: 
 tags: [doctrine, php, symfony2, form]
 ---
@@ -15,29 +15,32 @@ working with symfony2 forms.
 Imagine the situation where you have a User which can have multiples addresses.
 You will create 2 entities like this : 
 
-Entity/User.php :
-```
-<?php
-class User
-{
-    /*
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $addresses;
-}
-```
+    {% highlight php linenum %}   
+    <?php
 
-Entity/Address.php :
-```
-<?php
-class Address
-{
-    /* 
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="addresses")
-     */
-    private $user;
-}
-```
+    //Entity/User.php
+    class User
+    {
+        /*
+        * @ORM\OneToMany(targetEntity="Address", mappedBy="user", cascade={"persist", "remove"})
+        */
+        private $addresses;
+    }
+    {% endhighlight %}   
+
+    {% highlight php startinline linenum %}   
+    <?php
+
+    //Entity/Address.php
+    class Address
+    {
+        /* 
+         * @ORM\ManyToOne(targetEntity="User", inversedBy="addresses")
+         */
+        private $user;
+    }
+    {% endhighlight %}   
+
 _Note: You can run ./app/console doctrine:schema:validate to make sure the schema is
 correct._         
     
@@ -47,40 +50,47 @@ User the inverse side.
 Now imagine you want to create a new User using Symfony2 form. The form will
 looks like : 
 
-Form/Type/UserType.php : 
-```
-class UserType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    {% highlight php linenum %}   
+    <?php
+
+    // Form/Type/UserType.php
+    class UserType extends AbstractType
     {
-        $builder->add('addresses', 'collection', array(
-            'type' => new AddressType(),
-            'label' => 'Adresses',
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-        ));
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder->add('addresses', 'collection', array(
+                'type' => new AddressType(),
+                'label' => 'Adresses',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ));
+        }
     }
-}
-```
+    {% endhighlight %}   
+
 _Note: AddressType() is the form for Address containing all informations needed
 (address, city etc.)_
 
 
 Lets do the controller now as usually : 
 
-Controller/UserController.php :
-```
-public function createUserAction(Request $request)
-{
-    $user = new User;
-    $form = $this->createForm(new UserType(), $user);
-    if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($user); //error throwing
+    {% highlight php linenum %}   
+    <?php 
+
+    //Controller/UserController.php
+    ...
+
+    public function createUserAction(Request $request)
+    {
+        $user = new User;
+        $form = $this->createForm(new UserType(), $user);
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($user); //error throwing
+        }
     }
-}
-```
+    {% endhighlight %}   
 
 After trying to persist the $user entity (last line), we are getting "user_id cannot be
 null" error.
@@ -112,47 +122,58 @@ the association. We can do it by 2 ways :
 The first solution is to update, as we can do it for OneToOne association, the setter
  in User changing the setter from :
 
-```
-public function setAddresses($addresses) 
-{
-    $this->addresses = $addresses;
-    return $this;
-}
-```
-to :
-```
-public function setAddresses($addresses) 
-{
-    $this->addresses = $addresses;
-    foreach ($addresses as $address) {
-        $address->setUser($this);
+    {% highlight php linenum %}   
+    <?php
+    ...
+    public function setAddresses($addresses) 
+    {
+        $this->addresses = $addresses;
+        return $this;
     }
-    return $this;
-}
-```
+    {% endhighlight %}   
+
+to :
+
+    {% highlight php linenum %}   
+    <?php 
+    ...
+    public function setAddresses($addresses) 
+    {
+        $this->addresses = $addresses;
+        foreach ($addresses as $address) {
+            $address->setUser($this);
+        }
+        return $this;
+    }
+    {% endhighlight %}   
 
 This way, the User is directly set when calling :
-```
-$user->setAddress($address);
-```
+
+    {% highlight php linenum %}   
+    $user->setAddress($address);
+    {% endhighlight %}   
 
 _Note: this solution is working for OneToOne association too._
 
 ## Solution 2. Add addXXX/removeXXX methods.
 The second solution is to add 2 methods in the User.php entity which will be called
 automatically by Doctrine when adding or removing an Address.
-```
-public function addAddress(Address $address)
-{
-    $this->addresses[] = $address;
-    $address->setUser($this);
-    return $this;
-}
-public function removeAddress(Address $address)
-{
-    $this->addresses->removeElement($address);
-}
-```
+
+    {% highlight php linenum %}   
+    <?php
+    ...
+    public function addAddress(Address $address)
+    {
+        $this->addresses[] = $address;
+        $address->setUser($this);
+        return $this;
+    }
+
+    public function removeAddress(Address $address)
+    {
+        $this->addresses->removeElement($address);
+    }
+    {% endhighlight %}   
 [http://docs.doctrine-project.org/en/latest/reference/working-with-associations.html] (http://docs.doctrine-project.org/en/latest/reference/working-with-associations.html)
 
 _Note : setting the inversed side of the association is bad for performance. 
