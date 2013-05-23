@@ -176,6 +176,8 @@ automatically by Symfony (https://github.com/symfony/PropertyAccess/blob/master/
     {% endhighlight %}   
 [http://docs.doctrine-project.org/en/latest/reference/working-with-associations.html] (http://docs.doctrine-project.org/en/latest/reference/working-with-associations.html)
 
+If methods are not called, make sure to set the option [http://symfony.com/doc/master/reference/forms/types/collection.html#by-reference](by_reference) to false.
+
 _Note : setting the inversed side of the association is bad for performance. 
 You should do it carefully.
 [http://docs.doctrine-project.org/en/latest/reference/improving-performance.html] (http://docs.doctrine-project.org/en/latest/reference/improving-performance.html)._
