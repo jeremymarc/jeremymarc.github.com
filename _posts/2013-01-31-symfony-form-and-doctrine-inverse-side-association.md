@@ -97,8 +97,8 @@ null" error.
 
 This is due to the owning and inverse side doctrine concept. Doctrine will only
 check the owning side of the associations and we are working with the inverse side 
-[http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html] (http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html)
-:
+[http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html] (http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html):
+
 > Doctrine needs to know which of these two in-memory references is the one that
 > should be persisted and which not.(...)
 
@@ -114,7 +114,9 @@ check the owning side of the associations and we are working with the inverse si
 _Note: for OneToOne association, its depends where the foreign key is stored._
 
 As we cannot change the association direction, the only solution is to manually set 
-the association. We can do it by 2 ways : 
+the association.<br/>
+We can do it by 2 ways :
+
 + updating User.php setAddress method.
 + adding addAddress/removeAddress methods in User.php
 
