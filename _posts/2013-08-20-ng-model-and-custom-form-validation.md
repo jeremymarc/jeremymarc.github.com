@@ -10,8 +10,7 @@ tags: [javascript, angularjs]
 Last week, I was playing a bit with the popular angularjs framework and discover
 how to handle with custom form validation.
 
-I have a form with selects and  I want the user to be able to select multiples countries 
-but each country selected has to be unique.
+I had a form with multiple selects to select countries but each country selected has to be unique.
 
 ![screen1]({{ site.url }}/assets/images/screen1.png)
 
@@ -63,14 +62,12 @@ scope.prices.
                     return valid ? value : undefined;
                 }
 
-                //call on change
                 ngModel.$parsers.unshift(function(value) {
                     ngModel.$setValidity('unique', isUnique(value));
 
                     return value;
                 });
 
-                //call on load
                 ngModel.$formatters.unshift(function(value) {
                     ngModel.$setValidity('unique', isUnique(value, 1));
 
@@ -147,7 +144,7 @@ Angular automatically add classes to (in)valid form element (ng-valid/ng-invalid
 ![screen2]({{ site.url }}/assets/images/screen2.png)
 
 To finish, we can play with ng-disabled [3] on the submit button to prevent 
-the user to send the form if the form is invalid.
+the user to send the form if it is invalid.
 
 {% highlight html linenum %}   
     <button type="submit" ng-disabled="myForm.$invalid">Update</button>
@@ -155,10 +152,8 @@ the user to send the form if the form is invalid.
 
 ![screen3]({{ site.url }}/assets/images/screen3.png)
 
-_Note: myForm is invalid because we change the element validity in the directive using
-ngModel.$setValidity_
-
-
+_Note: myForm is invalid because we changed the element validity in the directive using
+ngModel.$setValidity._
 
 <br/>
 _Links_ <br>
