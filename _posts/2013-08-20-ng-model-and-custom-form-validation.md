@@ -100,7 +100,40 @@ Playing with ng-show, we can easily display an error message
 </span>
 {% endhighlight %}   
 
+<br>
+However, with the current implementation, our unique directive is not reusable : 
+Scope need to have a 'prices' element (which is an object).<br>
+Let's change that by setting the unique element directly in the attribute and use
+the 'name' attribute if the unique element is an object.
 
+{% highlight javacript %}   
+function isUnique(value, minOccur) {
+    if ("undefined" == typeof(minOccur)) {
+        minOccur = 0;
+    }
+
+    var selectedCountries = [],
+        isValid = true,
+        count = 0;
+
+    jQuery.each(scope[attr.unique], function(index, el) {
+        if (el == value || el[attr.name] == value) {
+            if (++count > minOccur) {
+                isValid = false;
+                return;
+            }
+        }
+    });
+    return isValid;
+}
+{% endhighlight %}
+
+{% highlight html %}   
+    <select ng-model="price.country" required="required" ng-options="key as value for (key, value) in countries" unique="prices"></select>
+{% endhighlight %}
+
+
+Now our directive is completely reusable, let style it a bit.<br>
 Angular automatically add classes to (in)valid form element (ng-valid/ng-invalid).
 
 {% highlight html  %}   
@@ -124,6 +157,8 @@ the user to send the form if the form is invalid.
 
 _Note: myForm is invalid because we change the element validity in the directive using
 ngModel.$setValidity_
+
+
 
 <br/>
 _Links_ <br>
