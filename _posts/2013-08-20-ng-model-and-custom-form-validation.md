@@ -103,7 +103,7 @@ Scope need to have a 'prices' element (which is an object).<br>
 Let's change that by setting the unique element directly in the attribute and use
 the 'name' attribute if the unique element is an object.
 
-{% highlight javacript %}   
+{% highlight javascript %}   
 function isUnique(value, minOccur) {
     if ("undefined" == typeof(minOccur)) {
         minOccur = 0;
