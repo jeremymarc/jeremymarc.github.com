@@ -21,6 +21,23 @@
   .formTag-wrapper input:-ms-input-placeholder {
     color: #c0cad7; }
 
+
+  .formTag-wrapper input[type="checkbox"] {
+    background: white url(img/checkbox.png) no-repeat 0 -26px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    width: 16px;
+    height: 17px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px 0 0 10px;
+  }
+  .formTag-wrapper input[type="checkbox"]:checked {
+    background-position: 0 0;
+  }
+
 .formTag-tags {
   display: inline-block;
   vertical-align: top; }
@@ -82,7 +99,7 @@
       width: 100%;
       color: #8999af; }
 
-.formTag-menu {
+.formTag-wrapper .formTag-menu {
   position: absolute;
   background: white;
   width: 150px;
