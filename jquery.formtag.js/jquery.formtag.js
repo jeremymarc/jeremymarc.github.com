@@ -5,8 +5,7 @@
  *  (c) 2014-2015 http://jeremymarc.github.com/jquery.formtag.js/
  *  MIT licensed
  */
-
-(function (factory) {
+;(function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['jquery'], factory);
@@ -19,11 +18,12 @@
   }
 }(function ($) {
   var formElements = [],
+      $wrapper,
       $addMenu,
-      $tags,
+      $addMenuWrapper,
       $addTagLink;
 
-  var tagForm = function() {
+  var formTag = function() {
       var _ = this;
 
       //default options
@@ -31,7 +31,9 @@
         add_button_text: '+ Add Field',
         add_button_class: 'add_field',
         tag_label: '~',
-        namespace: 'tagForm-',
+        namespace: 'formTag-',
+        delete_tag_delay: 0,
+        add_tag_delay: 0,
       };
 
       /**
@@ -45,6 +47,8 @@
         //  Check whether we're passing any options
         _.options = $.extend( _.options , options);
 
+        $wrapper = $('<div/>').addClass(_.options.namespace + 'wrapper');
+
         $form.hide();
         $form.find('input[type="text"], select').each(function(i, formElement) {
           formElements.push($(formElement));
@@ -55,21 +59,23 @@
         $addTagLink.html(_.options.add_button_text).addClass(_.options.namespace + _.options.add_button_class);
         $addTagLink.click(function() {
           updateAddMenuElementsVisibility();
+          return false;
         });
 
-        // Generate tags for form elements set
-        $tags = $('<div/>').addClass(_.options.namespace + 'tags');
-        _.tag.init();
-
-        $form.after($tags);
-        $tags.after($addTagLink);
+        $form.after($wrapper);
         _.initMenu($form);
+        $addMenuWrapper.append($addTagLink);
+        $wrapper.append($addMenuWrapper);
+
+        // Generate tags for form elements set
+        _.tag.init();
 
         // close tag menu on click
         $(document).click(function(e) {
           if (0 === $(e.target).parents('.' + _.options.namespace + 'values').length) {
             $('.' + _.options.namespace + 'values').hide();
           }
+          $addMenu.addClass(_.options.namespace + 'hidden');
         });
 
         return _;
@@ -79,10 +85,14 @@
        * Build the add element menu from form labels.
        */
       _.initMenu = function($form) {
-        $addMenu = $('<ul/>').addClass(_.options.namespace + 'menu');
-        $addMenu.hide();
-
         var val;
+
+        $addMenu = $('<ul/>')
+          .addClass(_.options.namespace + 'menu')
+          .addClass(_.options.namespace + 'hidden');
+
+        $addMenuWrapper = $('<div/>').addClass(_.options.namespace + 'menu-wrapper');
+
         $(formElements)
         .each(function(i, formElement) {
           val = $(formElement).val();
@@ -93,16 +103,23 @@
 
           $addMenu.append($li);
         });
-        $tags.after($addMenu);
+        $addMenuWrapper.append($addMenu);
 
         $addMenu.on('click', function(e) {
-          _.tag.add($(e.target).data());
+          var $last;
 
-          $('.' + _.options.namespace + 'tag:last-child ul').show();
-          $addMenu.hide();
+          _.tag.add($(e.target).data());
+          $last = $wrapper.find('.' + _.options.namespace + 'tag:last');
+          $last.find('ul').show();
+
+          if ($last.find('input[type="text"]').length > 0) {
+            $last.find('input[type="text"]').focus();
+          }
+
+          $addMenu.addClass(_.options.namespace + 'hidden')
 
           //all form elements are displayed
-          if (formElements.length == $tags.find('.' + _.options.namespace + 'tag').length) {
+          if (formElements.length == $wrapper.find('.' + _.options.namespace + 'tag').length) {
             $addTagLink.hide();
             return false;
           }
@@ -126,7 +143,10 @@
 
         add: function($formElement) {
           var $div, $a, $close, $tagMenu, label, $e;
-          $div = $('<div/>').addClass(_.options.namespace + 'tag').data($formElement);
+          $div = $('<div/>')
+            .addClass(_.options.namespace + 'tag')
+            .addClass(_.options.namespace + 'hidden')
+            .data($formElement);
           $formElement.addClass(_.options.namespace + 'tagged');
 
           //need to update the tag element
@@ -209,7 +229,10 @@
               .removeClass(_.options.namespace + 'tagged')
               .trigger('change');
 
-            $target.parent().remove();
+            $target.parent().addClass(_.options.namespace + 'hidden');
+            setTimeout(function() {
+              $target.parent().remove();
+            }, _.options.delete_tag_delay);
 
             $addTagLink.show();
           });
@@ -217,14 +240,17 @@
           $div.append($a);
           $div.append($close);
           $div.append($tagMenu);
-          $tags.append($div);
+          $addMenuWrapper.before($div);
+          setTimeout(function() {
+            $div.removeClass(_.options.namespace + 'hidden');
+          }, _.options.add_tag_delay);
         },
 
         /**
          * Return the form element title based on the label and selected values
          */
         title: function($formElement) {
-          var label = _.tag.label($formElement).html() + ': ',
+          var label = _.tag.label($formElement).text().trim() + ': ',
               val = $formElement.val();
 
           if (isFormElementValueValid(val)) {
@@ -298,30 +324,30 @@
       }
     });
 
-    $addMenu.show();
+    $addMenu.toggleClass('formTag-hidden');
   };
 
   function isTagShown($element) {
-    return $element.hasClass('tagForm-tagged');
+    return $element.hasClass('formTag-tagged');
   }
 
   function isFormElementValueValid(value) {
     return null !== value &&
       "undefined" !== typeof(value) &&
-      value.length > 0 && 
+      value.length > 0 &&
       "?" != value;
   };
 
-  $.fn.tagform = function (options) {
+  $.fn.formtag = function(options) {
     var len = this.length;
 
     return this.each(function(index) {
       // Cache a copy of $(this)
       var me = $(this),
-        key = 'tagForm' + (len > 1 ? '-' + ++index : ''),
-        instance = (new tagForm).init(me, options);
+        key = 'formTag' + (len > 1 ? '-' + ++index : ''),
+        instance = (new formTag).init(me, options);
 
-      // Invoke an tagForm instance
+      // Invoke an formTag instance
       me.data(key, instance).data('key', key);
     });
   };
