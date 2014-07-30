@@ -1,4 +1,4 @@
-permalink: /:categories/:year/:month/:day/:title 
+permalink: /:categories/:year/:month/:day/:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
@@ -28,8 +28,8 @@ JB :
   comments :
     provider : false
   analytics :
-    provider : google 
-    google : 
+    provider : google
+    google :
         tracking_id : 'UA-36427103-1'
   sharing :
     provider : false
