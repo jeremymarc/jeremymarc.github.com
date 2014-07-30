@@ -109,8 +109,7 @@ function isUnique(value, minOccur) {
         minOccur = 0;
     }
 
-    var selectedCountries = [],
-        isValid = true,
+    var isValid = true,
         count = 0;
 
     jQuery.each(scope[attr.unique], function(index, el) {
