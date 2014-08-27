@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Angular with Oauth2"
+title: "Oauth2 with Angular"
 description: ""
 category:
 tags: [angular, oauth2]
