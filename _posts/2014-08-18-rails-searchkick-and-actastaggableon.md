@@ -18,15 +18,15 @@ Monkey patch Tagging class like this (I have created a config/initializers/act_a
 {% highlight ruby %}
 module ActsAsTaggableOn
   class Tagging < ::ActiveRecord::Base
-    after_save :reindex_contact
+    after_save :reindex
 
-    def reindex_contact
+    def reindex
       taggable.reload.reindex
     end
   end
 end
 {% endhighlight %}
 
-_Note: Do not use after_commit, as its only triggered on the "parent" class (Contact for me.)_
+_Note: Do not use after_commit, as its only triggered on the "parent" class._
 
 Thanks to [Andrew Kane](https://twitter.com/andrewkane) for helping me on this.
