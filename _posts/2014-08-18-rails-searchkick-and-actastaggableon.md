@@ -13,7 +13,7 @@ you may have hit some issues updating a single entity after adding a tag.
 To make it works, you have to extend the Tagging class (inside the ActsAsTaggableOne module) by adding an after_save method.
 
 Solution:
-Monkey patch Tagging class like this (I have created a config/initializers/act_as_taggable.rb initializer file)
+Monkey patch Tagging class like this (I have created a config/initializers/act_as_taggable.rb initializer file).
 
 {% highlight ruby %}
 module ActsAsTaggableOn
