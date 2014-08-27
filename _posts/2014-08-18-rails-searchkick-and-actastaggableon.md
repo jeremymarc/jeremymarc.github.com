@@ -13,20 +13,20 @@ you may have hit some issues updating a single entity after adding a tag.
 To make it works, you have to extend the Tagging class (inside the ActsAsTaggableOne module) by adding an after_save method.
 
 Solution:
-Monkey patch Tagging class like this (I have created a config/initializers/act_as_taggable.rb initializer file)
+Monkey patch Tagging class like this (I have created a config/initializers/act_as_taggable.rb initializer file).
 
 {% highlight ruby %}
 module ActsAsTaggableOn
   class Tagging < ::ActiveRecord::Base
-    after_save :reindex_contact
+    after_save :reindex
 
-    def reindex_contact
+    def reindex
       taggable.reload.reindex
     end
   end
 end
 {% endhighlight %}
 
-_Note: Do not use after_commit, as its only triggered on the "parent" class (Contact for me.)_
+_Note: Do not use after_commit, as its only triggered on the "parent" class._
 
 Thanks to [Andrew Kane](https://twitter.com/andrewkane) for helping me on this.
