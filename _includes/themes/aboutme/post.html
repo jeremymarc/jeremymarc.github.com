@@ -9,6 +9,7 @@
 
                 <div class="post-btn-actions">
                     <a class="btn btn-edit" href="https://github.com/jeremymarc/jeremymarc.github.com/edit/master/_posts/{{ page.url | remove_first: '/' | replace:'/','-' }}.md"> Edit this page</a>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="{% for t in page.tags %} {{t}}{% endfor %}">Tweet</a>
                     <a href="https://twitter.com/jeremymarc" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @jeremymarc</a>
                 </div>
             </div>
@@ -27,6 +28,11 @@
                     class="twitter-follow-button"
                     data-show-count="false"
                     data-size="large">Follow @jeremymarc</a>
+
+                <a href="https://twitter.com/share"
+                    class="twitter-share-button"
+                    data-size="large"
+                    data-hashtags="{% for t in page.tags %} {{t}}{% endfor %}">Tweet</a>
             </div>
 
             <div class="post-tags">
