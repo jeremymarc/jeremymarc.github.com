@@ -67,8 +67,9 @@ For now, let's first deal with the access token, to automatically add it to all 
 ## Adding access token to all requests
 You can either add the access token as a query param or http header. I would recommend using http header because it
 has 2 main advantages:
-- there is no risk that your access token will be stored in a log file on the server.
-- it's better to have a "clean" url
+
+* there is no risk that your access token will be stored in a log file on the server.
+* it's better to have a "clean" url
 
 ### Adding Access Token to HTTP Header
 Lets add the code to add the header authentication to all requests inside the run block
