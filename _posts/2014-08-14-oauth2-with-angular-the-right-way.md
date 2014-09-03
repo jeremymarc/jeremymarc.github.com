@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Oauth2 with Angular: The right way."
+title: "Oauth2 with Angular: The right way"
 description: ""
 category:
 tags: [angular, oauth2, security]
