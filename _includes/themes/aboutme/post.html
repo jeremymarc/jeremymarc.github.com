@@ -23,6 +23,15 @@
                 {{ content }}
             </div>
 
+            <div class="post-tags">
+                {% unless page.tags == empty %}
+                <ul class="tag_box">
+                    {% assign tags_list = page.tags %}
+                    {% include JB/tags_list %}
+                </ul>
+                {% endunless %}
+            </div>
+
             <div class="post-actions" tabindex="3">
                 <a href="https://twitter.com/jeremymarc"
                     class="twitter-follow-button"
@@ -35,14 +44,6 @@
                     data-hashtags="{% for t in page.tags %} {{t}},{% endfor %}">Tweet</a>
             </div>
 
-            <div class="post-tags">
-                {% unless page.tags == empty %}
-                <ul class="tag_box">
-                    {% assign tags_list = page.tags %}
-                    {% include JB/tags_list %}
-                </ul>
-                {% endunless %}
-            </div>
             <div class="post-comments">
                 {% include JB/comments %}
             </div>
