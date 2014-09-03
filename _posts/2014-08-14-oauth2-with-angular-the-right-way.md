@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Oauth2 with Angular: the right way"
+title: "Oauth2 with Angular: The right way."
 description: ""
 category:
-tags: [angular, oauth2, access_token, renew_token]
+tags: [angular, oauth2, security]
 ---
 {% include JB/setup %}
 
