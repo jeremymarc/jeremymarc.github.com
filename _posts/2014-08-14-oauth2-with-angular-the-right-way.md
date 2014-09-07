@@ -195,4 +195,4 @@ the client secret and the renew token. As the JavaScript client is not considere
 your server must allow the granting of a token without a client_secret.
 
 For the renew token, storing it in a encrypted cookie is a working solution ; be carefull of XSS attack (someone could steal the encrypted cookie)
-and use a proper encryption algorithm if you go with this solution.
+and use a proper encryption algorithm if you go with it.
