@@ -30,10 +30,10 @@ title: Jeremy Marc
     <h2>Libraries</h2>
     <ul>
       <li><a href="http://jeremymarc.github.io/jquery.formtag.js/" title="Transform a form into mutliples button tag elements">jQuery.formtag - <span>new!</span></a></li>
+      <li><a href="https://github.com/jeremymarc/AkamaiPhpClient" title="PHP Client for Akamai Rest API">Akamai PHP Client - <span>new!</span></a></li>
       <li><a href="https://github.com/jeremymarc/JmBalancedPaymentBundle" title="integrate BalancedPayment library to accept credit cards and debit bank accounts for your business.">JmBalancedPaymentBundle</a></li>
       <li><a href="https://github.com/Remixjobs/RjEmailBundle" title="Easily manage and send dynamic emails in multiple languages using Twig and Sonata.">RjEmailBundle</a></li>
       <li><a href="https://github.com/jeremymarc/JmABBundle" title="Allow you to manage HTML Templates stored in your database. Templates are written with Twig, use I18N, and can be set with two versions for AB Testing.">JmABBundle</a></li>
-      <li><a href="https://github.com/jeremymarc/jabikity" title="AS3 XMPP Library">Jabikity</a></li>
     </ul>
   </section>
 
